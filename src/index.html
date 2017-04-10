@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ztree插件</title>
+	<link rel="stylesheet" href="http://c.58cdn.com.cn/crop/biz/base/ztree/zTreeStyle.css">
+</head>
+<body>
+	<ul id="treeDemo" class="ztree"></ul>
+	<script src="http://j1.58cdn.com.cn/crop/biz/base/js/jquery.js"></script>
+	<script src="http://j1.58cdn.com.cn/crop/biz/base/ztree/jquery.ztree.all.min.js"></script>
+	<script>
+		var treeData1 = {
+			id: 1,
+			name: '北京市',
+			children: [
+				{
+					id: 1142,
+					name: '朝阳区',
+					isParent: true
+				},
+				{
+					id: 1143,
+					name: '海淀区',
+					isParent: true
+				},
+				{
+					id: 1138,
+					name: '东城区'
+				}
+			]
+		};
+		var setting = {
+			async: {
+				enable: true,
+				url: "./testAsync.json",
+				type: 'get',
+				autoParam: ["id", "name"],
+				dataFilter: function(treeId, parentNode, responseData){
+					console.log(parentNode);
+					return responseData;
+				}
+			},
+			check: {
+				enable: true,
+				// chkStyle: 'radio',
+				radioType: 'all'
+			},
+			data: {
+				key: {
+					url: "aaa"
+					// name: 'name'
+				}
+			},
+			edit: {
+				enable: true
+			},
+			view: {
+				// autoCancelSelected: false
+			},
+			callback: {
+				beforeRemove: function(treeNode){
+					$.ajax({
+						success: function(){
+							ztreeObj.removeChild(treeNode)
+						}
+					})
+					return false;
+				}
+			}
+		};
+		var ztreeObj = $.fn.zTree.init($("#treeDemo"), setting, treeData1);
+		console.log();
+	</script>
+</body>
+</html>

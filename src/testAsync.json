@@ -1,0 +1,16 @@
+[
+	{
+	    "id": 1399,
+	    "name": "黄浦区",
+	    "aaa":"http://www.baidu.com"
+	},
+	{
+	    "id": 1400,
+	    "name": "卢湾区",
+	    "isParent": true
+	},
+	{
+	    "id": 1403,
+	    "name": "静安区"
+	}
+]
